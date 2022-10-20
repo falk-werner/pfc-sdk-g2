@@ -31,17 +31,17 @@ case "$1" in
         ptxdist toolchain /opt/gcc-Toolchain-2019.12/arm-linux-gnueabihf/bin/
         ptxdist clean -q
 
-        if ! md5sum packages/closed-source-packages.tar.xz.md5 ; then
+        if ! md5sum -c packages/closed-source-packages.tar.xz.md5 ; then
             echo "Add Closed Source packages"
             curl -fSL -s -o packages/closed-source-packages.tar.xz ${CSS_PACKAGES_URL}
-            md5sum packages/closed-source-packages.tar.xz.md5
+            md5sum -c packages/closed-source-packages.tar.xz.md5
             tar -xf packages/closed-source-packages.tar.xz
         fi
 
-        if ! md5sum packages/open-source-packages.tar.xz.md5 ; then
+        if ! md5sum -c packages/open-source-packages.tar.xz.md5 ; then
             echo "Add OSS Packages"
             curl -fSL -s -o packages/open-source-packages.tar.xz ${OSS_PACKAGES_URL}
-            md5sum packages/open-source-packages.tar.xz.md5
+            md5sum -c packages/open-source-packages.tar.xz.md5
             tar -xf packages/open-source-packages.tar.xz
         fi
         ;;
