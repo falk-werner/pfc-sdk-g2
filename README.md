@@ -23,6 +23,3 @@ The make wrapper is used for convenience, to simplify the interaction with docke
 | build   | build PTXdist project |
 | images  | create SD card image and WUP file |
 | run     | runs *pfc-builder* in bash mode |
-| clean   | cleans up PTXdist project |
-| clean-builder | cleans up *build-cache* directory (used for docker image *pfc-builder*) |
-| distclean |  cleans up generated directories and removes docker image *pfc-builder* |
