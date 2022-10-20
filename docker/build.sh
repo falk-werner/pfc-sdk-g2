@@ -2,9 +2,9 @@
 
 set -e
 
-TAG=FW19-03.07.14
-OSS_PACKAGES_URL=https://github.com/falk-werner/pfc-sdk-g2/releases/download/${TAG}/open-source-packages.tar.xz
-CSS_PACKAGES_URL=https://github.com/falk-werner/pfc-sdk-g2/releases/download/${TAG}/closed-source-packages.tar.xz
+VERSION=03.07.14
+OSS_PACKAGES_URL=https://github.com/falk-werner/pfc-sdk-g2/releases/download/${VERSION}/open-source-packages.tar.xz
+CSS_PACKAGES_URL=https://github.com/falk-werner/pfc-sdk-g2/releases/download/${VERSION}/closed-source-packages.tar.xz
 
 print_usage() {
     cat << EOF
@@ -17,7 +17,6 @@ Commands:
     init    initialize project
     build   full build
     images
-    ptxdist invoke ptxdist 
 EOF
 }
 
