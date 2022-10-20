@@ -1,0 +1,9 @@
+/build-cache
+/ptxproj/src/*.tar.*
+/ptxproj/src/*.tar
+/ptxproj/src/*.tgz
+/ptxproj/src/certdata-*.txt
+/ptxproj/configs/wago-pfcXXX/packages/*.ipk
+/ptxproj/configs/wago-pfcXXX/packages/*.tgz
+/ptxproj/packages/*.tar.xz
+/ptxproj/platform-wago-pfcXXX
