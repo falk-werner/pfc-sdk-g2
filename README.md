@@ -1,4 +1,4 @@
-[![Docker Image CI](https://github.com/falk-werner/pfc-sdk-g2/actions/workflows/docker-image.yml/badge.svg)](https://github.com/falk-werner/pfc-sdk-g2/actions/workflows/docker-image.yml)
+[![build](https://github.com/falk-werner/pfc-sdk-g2/actions/workflows/build.yml/badge.svg)](https://github.com/falk-werner/pfc-sdk-g2/actions/workflows/build.yml)
 
 # pfc-sdk-g2
 
