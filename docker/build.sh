@@ -57,6 +57,9 @@ case "$1" in
     images)
         ptxdist images -q
         ;;
+    wup)
+        make wup
+        ;;
     *)
         echo "error: unknown command" 1>&2
         exit 1

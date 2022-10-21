@@ -50,3 +50,7 @@ offline-build: builder | $(PTXPROJ)
 .PHONY: images
 images: builder | $(PTXPROJ)
 	docker run --rm -it --network none --user "$(USERID)" -v "$(PTXPROJ_PATH):/home/user/ptxproj" pfc-builder build images
+
+.PHONY: wup
+wup: builder | $(PTXPROJ)
+	docker run --rm -it --network none --user "$(USERID)" -v "$(PTXPROJ_PATH):/home/user/ptxproj" pfc-builder build wup
