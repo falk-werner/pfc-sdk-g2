@@ -2,39 +2,36 @@ ARG REGISTRY_PREFIX=''
 ARG CODENAME=xenial
 
 FROM ${REGISTRY_PREFIX}ubuntu:${CODENAME} as builder
-RUN apt update \
-    && apt upgrade -y \
-    && apt install -y --no-install-recommends \
-        build-essential \
-        curl \
-        libncurses5-dev \
-        wget \
-        gawk \
-        flex \
-        bison \
-        texinfo \
-        python-dev \
-        python3-setuptools \
-        g++ \
-        dialog \
-        lzop \
-        libc6-dev \
-        autoconf \
-        libtool \
-        xmlstarlet \
-        xsltproc \
-        doxygen \
-        autopoint \
-        gettext \
-        rsync \
-        vim \
-        software-properties-common \
-        bc \
-        groff \
-        zip \
-        unzip \
-        pkg-config \
-    && apt autoremove -y
+RUN apt install -y --no-install-recommends \
+      build-essential \
+      curl \
+      libncurses5-dev \
+      wget \
+      gawk \
+      flex \
+      bison \
+      texinfo \
+      python-dev \
+      python3-setuptools \
+      g++ \
+      dialog \
+      lzop \
+      libc6-dev \
+      autoconf \
+      libtool \
+      xmlstarlet \
+      xsltproc \
+      doxygen \
+      autopoint \
+      gettext \
+      rsync \
+      vim \
+      software-properties-common \
+      bc \
+      groff \
+      zip \
+      unzip \
+      pkg-config
 
 FROM builder as dumb_init
 ARG BUILD_DIR=/tmp/build
