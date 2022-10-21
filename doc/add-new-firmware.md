@@ -8,10 +8,12 @@ a new firmware is added after a new version is released in the upstream reposito
 1. [Create a preliminary Tag](#Create-a-preliminary-Tag)
 2. [Create a preliminary Release](#Create-a-preliminary-Release)
 3. [Import sources](#Import-Sources)
-4. [Create open source package](#Create open-source-package)
-5. create close source package
-6. create release tag
-7. release
+4. [Check Toochain and PTXdist version](#Check-Toochain-and-PTXdist-version)
+5. [Create open source package](#Create-open-source-package)
+6. [Create close source package](#Create-close-source-package)
+7. [Testing and Bugfixing](#Testing-and-Bugfixing)
+8. create release tag
+9. release
 
 ## Create a preliminary Tag
 
@@ -25,6 +27,8 @@ git tag -a v03.08.08 -m "v03.08.08 (FW20.1)"
 
 The purpose of this tag is to create a preliminary release with a proper
 URL that can be used for testing.
+
+Update the `VERSION` variable in the `docker/build.sh` script.
 
 ## Create a preliminary Release
 
@@ -64,3 +68,78 @@ Commit and publish the changes so far.
     git add ptxproj
     git commit -m "importet sources from upstream"
     git push -u origin FW20.1
+
+## Check Toochain and PTXdist version
+
+Check the required versions of toolchain and PTXdist. Update `Dockerfile`
+if needed. Instructions can be found in the upstream readme.
+
+## Create open source package
+
+Make sure that all required packages are available.
+
+    make get
+
+Remove `/src/production*.tar`. This large binary is not needed to build
+the firmware. It is necessary to change PTXdist configuration an platform
+configuration to do this. But this can be done later.
+
+All archives in `/src` directory must be put in the open souce package
+archive.
+
+````bash
+mkdir -p /tmp/oss-packages/src
+cd /tmp/oss-packages
+mv /path/to/ptxproj/*.tar* src
+mv /path/to/ptxproj/*.tgz src
+mv /path/to/ptxproj/certdata-*.txt src
+tar -cf open-source-packages.tar src --owner=root --group=root
+xz -z9 open-source-packages.tar
+````
+
+Update ptxproj/packages/open-source-packages.tar.xz.md5
+
+    mkdir /path/to/ptxproj/packages
+    md5sum open-source-packages.tar.xz >  path/to/ptxproj/packages/open-source-packages.tar.xz.md5
+
+Upload open-source-packages.tar.xz to the previously created
+preliminary release.
+
+## Create close source package
+
+All `.ipk` files and `.tgz` archives of `ptxproj/configs/wago-pfcXXX/packages` directory
+must be put into the closed source package archive.
+
+````bash
+mkdir -p /tmp/css-packages/src/configs/wago-pfcXXX/packages
+cd /tmp/css-packages
+mv /path/to/ptxproj/configs/wago-pfcXXX/packages/*.ipk configs/wago-pfcXXX/packages
+mv /path/to/ptxproj/configs/wago-pfcXXX/packages/*.tgz configs/wago-pfcXXX/packages
+tar -cf closed-source-packages.tar configs --owner=root --group=root
+xz -z9 closed-source-packages.tar
+````
+
+Update ptxproj/packages/closed-source-packages.tar.xz.md5
+
+    mkdir /path/to/ptxproj/packages
+    md5sum closed-source-packages.tar.xz >  path/to/ptxproj/packages/closed-source-packages.tar.xz.md5
+
+Upload closed-source-packages.tar.xz to the previously created
+preliminary release.
+
+## Testing and Bugfixing
+
+There are two make targets to support testing and bugfixing stage.
+
+    make init
+
+Use `make init` to download and extract required packages from the prelimiary release.
+
+    make offline-get
+
+Use `make offline-get` to verify that no additional packages are required.
+
+    make offline-build
+
+Use `make offline-build` to build the image. During `offline-build` the executing docker
+container does not have network access to ensure everything needed is contained.
