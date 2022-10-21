@@ -48,6 +48,12 @@ case "$1" in
     build | "")
         ptxdist go -q
         ;;
+    get)
+        ptxdist select configs/wago-pfcXXX/ptxconfig_pfc_g2
+        ptxdist platform configs/wago-pfcXXX/platformconfig        
+        ptxdist toolchain /opt/gcc-Toolchain-2019.12/arm-linux-gnueabihf/bin/
+        ptxdist get -q
+        ;;
     images)
         ptxdist images -q
         ;;
