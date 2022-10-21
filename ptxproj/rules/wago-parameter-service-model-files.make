@@ -76,7 +76,7 @@ $(STATEDIR)/wago-parameter-service-model-files.get:
 	@$(call touch)
 
 else
-$(STATEDIR)/wago-parameter-service-core.get:
+$(STATEDIR)/wago-parameter-service-model-files.get:
 	@$(call touch)
 
 endif
