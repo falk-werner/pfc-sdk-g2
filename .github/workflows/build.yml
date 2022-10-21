@@ -14,5 +14,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build
-      run: make init
+
+    - name: Create Builder
+      run: make builder
+
+    - name: Init Project
+      run: make builder
+
+    - name: Verify
+      run: make offline-get
