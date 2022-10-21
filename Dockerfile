@@ -60,11 +60,11 @@ RUN mkdir -p "${TOOLCHAIN_DIR}" \
     toolchain.tar.xz
 
 FROM builder as ptxdist
-ARG PTXDIST_URL=https://github.com/WAGO/ptxdist/archive/refs/tags/Ptxdist-2017.11.1.tar.gz
+ARG PTXDIST_URL=https://github.com/WAGO/ptxdist/archive/refs/tags/Update-2020.08.0.tar.gz
 RUN cd /tmp \
   && curl -fSL -s -o toolchain.tar.xz "${PTXDIST_URL}" \
   && tar -xf toolchain.tar.xz \
-  && cd ptxdist-Ptxdist-2017.11.1 \
+  && cd ptxdist-Update-2020.08.0 \
   && ./configure \
   && make
 
@@ -75,11 +75,11 @@ ARG TOOLCHAIN_DIR=/opt/gcc-Toolchain-2019.12
 COPY --from=dumb_init /usr/local/bin/dumb-init /usr/local/bin/dumb-init
 COPY --from=toolchain "${TOOLCHAIN_DIR}" "${TOOLCHAIN_DIR}"
 
-COPY --from=ptxdist /tmp/ptxdist-Ptxdist-2017.11.1 /tmp/ptxdist-Ptxdist-2017.11.1
-RUN cd /tmp/ptxdist-Ptxdist-2017.11.1 \
+COPY --from=ptxdist /tmp/ptxdist-Update-2020.08.0 /tmp/ptxdist-Update-2020.08.0
+RUN cd /tmp/ptxdist-Update-2020.08.0 \
   && make install \
   && cd - \
-  && rm -rf /tmp/ptxdist-Ptxdist-2017.11.1
+  && rm -rf /tmp/ptxdist-Update-2020.08.0
 
 COPY build.sh /usr/local/bin/build
 
