@@ -18,10 +18,14 @@ To install make, you can use apt:
 
 The make wrapper is used for convenience, to simplify the interaction with docker. There are some main goals defined:
 
-| Command | Description |
-| ------- | ----------- |
-| builder | create docker image *pfc-builder* |
-| init    | initialize PTXdist project in *ptxproj* directory |
-| build   | build PTXdist project |
-| images  | create SD card image and WUP file |
-| run     | runs *pfc-builder* in bash mode |
+| Command       | Description |
+| ------------- | ----------- |
+| builder       | create docker image *pfc-builder* |
+| init          | initialize PTXdist project in *ptxproj* directory |
+| get           | download all OSS packages |
+| offline-get   | verify that all OSS packages are downloaded |
+| build         | build all packages |
+| offline-build | build all packages without network access |
+| images        | create SD card image and WUP file |
+| wup           | create WUP file |
+| run           | runs *pfc-builder* in bash mode |
