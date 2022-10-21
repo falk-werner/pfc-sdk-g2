@@ -19,7 +19,7 @@ jobs:
       run: make builder
 
     - name: Init Project
-      run: make builder
+      run: make init
 
     - name: Verify
       run: make offline-get
