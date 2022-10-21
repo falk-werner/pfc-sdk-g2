@@ -29,7 +29,7 @@ run: builder | $(PTXPROJ)
 
 .PHONY: init
 init: builder | $(PTXPROJ)
-	docker run --rm -it --user "$(USERID)" -v "$(PTXPROJ_PATH):/home/user/ptxproj" pfc-builder build init
+	docker run --rm -i --user "$(USERID)" -v "$(PTXPROJ_PATH):/home/user/ptxproj" pfc-builder build init
 
 .PHONY: build
 build: builder | $(PTXPROJ)
