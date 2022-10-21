@@ -27,9 +27,17 @@ $(OUT_DIR)/pfc-builder: Dockerfile docker/build.sh Makefile | $(OUT_DIR)
 run: builder | $(PTXPROJ)
 	docker run --rm -it --user "$(USERID)" -v "$(PTXPROJ_PATH):/home/user/ptxproj" pfc-builder bash
 
+.PHONY: get
+get: builder | $(PTXPROJ)
+	docker run --rm -it --user "$(USERID)" -v "$(PTXPROJ_PATH):/home/user/ptxproj" pfc-builder build get
+
+.PHONY: offline-get
+offline-get: builder | $(PTXPROJ)
+	docker run --rm -i --network none --user "$(USERID)" -v "$(PTXPROJ_PATH):/home/user/ptxproj" pfc-builder build get
+
 .PHONY: init
 init: builder | $(PTXPROJ)
-	docker run --rm -it --user "$(USERID)" -v "$(PTXPROJ_PATH):/home/user/ptxproj" pfc-builder build init
+	docker run --rm -i --user "$(USERID)" -v "$(PTXPROJ_PATH):/home/user/ptxproj" pfc-builder build init
 
 .PHONY: build
 build: builder | $(PTXPROJ)
@@ -42,3 +50,7 @@ offline-build: builder | $(PTXPROJ)
 .PHONY: images
 images: builder | $(PTXPROJ)
 	docker run --rm -it --network none --user "$(USERID)" -v "$(PTXPROJ_PATH):/home/user/ptxproj" pfc-builder build images
+
+.PHONY: wup
+wup: builder | $(PTXPROJ)
+	docker run --rm -it --network none --user "$(USERID)" -v "$(PTXPROJ_PATH):/home/user/ptxproj" pfc-builder build wup
