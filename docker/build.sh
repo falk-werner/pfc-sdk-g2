@@ -15,8 +15,10 @@ Usage:
 
 Commands:
     init    initialize project
-    build   full build
-    images
+    get     download OSS packages
+    build   build all packages
+    images  build images
+    wup     create WUP file
 EOF
 }
 
@@ -35,15 +37,15 @@ case "$1" in
             echo "Add Closed Source packages"
             curl -fSL -s -o packages/closed-source-packages.tar.xz ${CSS_PACKAGES_URL}
             md5sum -c packages/closed-source-packages.tar.xz.md5
-            tar -xf packages/closed-source-packages.tar.xz
         fi
+        tar -xf packages/closed-source-packages.tar.xz
 
         if ! md5sum -c packages/open-source-packages.tar.xz.md5 ; then
             echo "Add OSS Packages"
             curl -fSL -s -o packages/open-source-packages.tar.xz ${OSS_PACKAGES_URL}
             md5sum -c packages/open-source-packages.tar.xz.md5
-            tar -xf packages/open-source-packages.tar.xz
         fi
+        tar -xf packages/open-source-packages.tar.xz
         ;;
     build | "")
         ptxdist go -q
