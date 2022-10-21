@@ -12,8 +12,8 @@ a new firmware is added after a new version is released in the upstream reposito
 5. [Create open source package](#Create-open-source-package)
 6. [Create close source package](#Create-close-source-package)
 7. [Testing and Bugfixing](#Testing-and-Bugfixing)
-8. create release tag
-9. release
+8. [Create SD-card Image and WUP file](#Create-SD-card-Image-and-WUP-file)
+9. [Retintegrate, Tag and Release](#Retintegrate,-Tag-and-Release)
 
 ## Create a preliminary Tag
 
@@ -129,17 +129,29 @@ preliminary release.
 
 ## Testing and Bugfixing
 
-There are two make targets to support testing and bugfixing stage.
+There are several make targets to support testing and bugfixing stage.
 
-    make init
+| Target        | Description |
+| ------------- | ----------- |
+| init          | download and extract required packages from the prelimiary release |
+| offline-get   | verify that no additional packages are required |
+| offline-build | build all packages without network access |
+| images        | build images |
+| wup           | create WUP file |
 
-Use `make init` to download and extract required packages from the prelimiary release.
+## Create SD-card Image and WUP file
 
-    make offline-get
+````bash
+make images
+make wup
+````
 
-Use `make offline-get` to verify that no additional packages are required.
+Add SD-card image and WUP file to the preliminary release.
 
-    make offline-build
+## Retintegrate, Tag and Release
 
-Use `make offline-build` to build the image. During `offline-build` the executing docker
-container does not have network access to ensure everything needed is contained.
+Create a pull request and merge the branch into `main`.
+
+Delete the preliminary tag and recreate a new one.
+
+Publish the preliminary release as the latest release.
