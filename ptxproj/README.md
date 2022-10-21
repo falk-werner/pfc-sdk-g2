@@ -4,10 +4,8 @@
 Find the table of supported devices at the end of the document [Link to table](#supported-devices)
 
 # ..:: Attention ::.. 
-## Starting with firmware 19, the PFC200 of the first generation and PFC100 has its own image and release notes.
-## For FW18 a new toolchain is required!
-Follow the steps in chapter "Install "cross-toolchain" also
-check the installation path.
+## Starting with firmware 20.1 you need to update the ptxdist buildsystem. 
+[Ptxdist-Buildsystem](https://github.com/WAGO/ptxdist)
 
 # Install WAGO-PFC-SDK on Ubuntu 16.04.5 (64bit) LTS
 
@@ -16,7 +14,7 @@ This HowTo describes steps to install the Software-Development-Kit (SDK) for PFC
 The start into the embedded linux world requires substantial technical know-how to have success. 
 Therefore WAGO recommends familiarity with the following topics for the future embedded linux developer:
 - Linux-OS
-- working on command line interface(CLI)
+/- working on command line interface(CLI)
 - writing Makefile, C or C++ code, shell-scripts.
 - Cross-Platform-Development.
 
@@ -35,10 +33,6 @@ which make a uniquely defined host environment mandatory. Ubuntu 16.04 (64bit) f
 others may or may not.
 
 # PREREQUISITES
-You need a internet connection on your development host. Because during image creation the source file
-"nlohmann-json-v3.7.0.tar.gz" will be downloaded automatically.
-In case you do not have a internet connetion on your development host. Please refer to section
-[ 4.6) Download packages ].
 
 # Installation and building STEP-BY-STEP:
 
@@ -108,7 +102,7 @@ These steps will only concentrate on the recommented Ubuntu version:
     >cd ~
     >mkdir -p wago/ptxproj/
     >cd wago/ptxproj/
-    >git clone https://github.com/WAGO/pfc-firmware-sdk.git .
+    >git clone https://github.com/WAGO/pfc-firmware-sdk-G2 .
 ```
 
 ## 2.) Install "cross toolchain"
