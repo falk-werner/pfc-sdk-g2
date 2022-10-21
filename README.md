@@ -1,3 +1,5 @@
+[![Docker Image CI](https://github.com/falk-werner/pfc-sdk-g2/actions/workflows/docker-image.yml/badge.svg)](https://github.com/falk-werner/pfc-sdk-g2/actions/workflows/docker-image.yml)
+
 # pfc-sdk-g2
 
 Provides a docker file to create PFC firmware images.  
