@@ -1,3 +1,4 @@
+/.vscode
 /build-cache
 /ptxproj/src/*.tar.*
 /ptxproj/src/*.tar
