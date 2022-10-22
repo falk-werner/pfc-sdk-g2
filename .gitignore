@@ -1,3 +1,4 @@
+/.vscode
 /build-cache
 /ptxproj/src/*.tar.*
 /ptxproj/src/*.tar
@@ -9,3 +10,4 @@
 /ptxproj/packages/*.tar.xz
 /ptxproj/platform-wago-pfcXXX
 /ptxproj/configs/wago-pfcXXX/packages/tmp/*.tar.gz
+/ptxproj/**/coverage-sources.zip

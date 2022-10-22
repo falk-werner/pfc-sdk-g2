@@ -2,7 +2,7 @@
 
 set -e
 
-VERSION=v03.09.04
+VERSION=v03.10.08
 OSS_PACKAGES_URL=https://github.com/falk-werner/pfc-sdk-g2/releases/download/${VERSION}/open-source-packages.tar.xz
 CSS_PACKAGES_URL=https://github.com/falk-werner/pfc-sdk-g2/releases/download/${VERSION}/closed-source-packages.tar.xz
 
