@@ -90,9 +90,10 @@ archive.
 ````bash
 mkdir -p /tmp/oss-packages/src
 cd /tmp/oss-packages
-mv /path/to/ptxproj/*.tar* src
-mv /path/to/ptxproj/*.tgz src
-mv /path/to/ptxproj/certdata-*.txt src
+mv /path/to/ptxproj/src/*.tar* src
+mv /path/to/ptxproj/src/*.tgz src
+mv /path/to/ptxproj/src/*.zip src
+mv /path/to/ptxproj/src/certdata-*.txt src
 tar -cf open-source-packages.tar src --owner=root --group=root
 xz -z9 open-source-packages.tar
 ````
