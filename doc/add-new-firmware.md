@@ -112,7 +112,7 @@ All `.ipk` files and `.tgz` archives of `ptxproj/configs/wago-pfcXXX/packages` d
 must be put into the closed source package archive.
 
 ````bash
-mkdir -p /tmp/css-packages/src/configs/wago-pfcXXX/packages
+mkdir -p /tmp/css-packages/configs/wago-pfcXXX/packages
 cd /tmp/css-packages
 mv /path/to/ptxproj/configs/wago-pfcXXX/packages/*.ipk configs/wago-pfcXXX/packages
 mv /path/to/ptxproj/configs/wago-pfcXXX/packages/*.tgz configs/wago-pfcXXX/packages
