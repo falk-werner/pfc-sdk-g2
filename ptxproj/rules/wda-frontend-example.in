@@ -1,0 +1,9 @@
+## SECTION=project_specific
+
+config WDA_FRONTEND_EXAMPLE
+	bool
+	prompt "wda-frontend-example"
+	select HOST_CMAKE
+	select WAGO_PARAMETER_SERVICE_COM
+	help
+	  FIXME
