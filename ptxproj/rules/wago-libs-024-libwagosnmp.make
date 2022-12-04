@@ -21,7 +21,7 @@ LIBWAGOSNMP_MD5            :=
 LIBWAGOSNMP                := libwagosnmp
 LIBWAGOSNMP_URL            := file://local_src/$(LIBWAGOSNMP)
 LIBWAGOSNMP_BUILDCONFIG    := Release
-LIBWAGOSNMP_SRC_DIR        := $(PTXDIST_WORKSPACE)/local_src/$(LIBWAGOSNMP)
+LIBWAGOSNMP_SRC_DIR        := $(call ptx/in-path, PTXDIST_PATH, local_src/$(LIBWAGOSNMP))
 LIBWAGOSNMP_BUILDROOT_DIR  := $(BUILDDIR)/$(LIBWAGOSNMP)
 LIBWAGOSNMP_DIR            := $(LIBWAGOSNMP_BUILDROOT_DIR)/src
 LIBWAGOSNMP_BUILD_DIR      := $(LIBWAGOSNMP_BUILDROOT_DIR)/bin/$(LIBWAGOSNMP_BUILDCONFIG)
@@ -31,7 +31,9 @@ LIBWAGOSNMP_CONF_TOOL      := NO
 LIBWAGOSNMP_MAKE_ENV       := $(CROSS_ENV) \
 BUILDCONFIG=$(LIBWAGOSNMP_BUILDCONFIG) \
 BIN_DIR=$(LIBWAGOSNMP_BUILD_DIR) \
-SCRIPT_DIR=$(PTXDIST_SYSROOT_HOST)/lib/ct-build
+SCRIPT_DIR=$(PTXDIST_SYSROOT_HOST)/lib/ct-build \
+PTXDIST_PACKAGE_MK_FILE=$(call ptx/in-path, PTXDIST_PATH, rules/wago-libs-024-libwagosnmp.make)
+
 # ----------------------------------------------------------------------------
 # Extract
 # ----------------------------------------------------------------------------

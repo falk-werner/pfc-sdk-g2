@@ -43,7 +43,7 @@ DEFCONFIG				:= $(findstring _defconfig,$(PTXCONF_KERNEL_CONFIG))
 # ----------------------------------------------------------------------------
 # Include
 # ----------------------------------------------------------------------------
-include $(PTXDIST_WORKSPACE)/rules/other/definitions.make
+include $(call ptx/in-path, PTXDIST_PATH, /rules/other/definitions.make)
 
 # ----------------------------------------------------------------------------
 # Prepare

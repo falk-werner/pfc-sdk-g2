@@ -23,7 +23,7 @@ PACKAGES-$(PTXCONF_CT_IPC_MSG_HEADER) += ct_ipc_msg_header
 #
 CT_IPC_MSG_HEADER_VERSION 	:= 1.0.0
 CT_IPC_MSG_HEADER		:= ct_ipc_msg_header
-CT_IPC_MSG_HEADER_URL	:= file://$(PTXDIST_WORKSPACE)/local_src/config-tools
+CT_IPC_MSG_HEADER_URL	:= file://local_src/config-tools
 CT_IPC_MSG_HEADER_DIR	:= $(BUILDDIR)/config-tools
 
 # ----------------------------------------------------------------------------
@@ -73,8 +73,8 @@ $(STATEDIR)/ct_ipc_msg_header.compile:
 $(STATEDIR)/ct_ipc_msg_header.install: $(ct_ipc_msg_header_install_deps_default)
 	@$(call targetinfo)
 
-	cp $(PTXDIST_WORKSPACE)/local_src/config-tools/wago_ct_ipc_msg_com.h $(PTXDIST_PLATFORMDIR)/sysroot-target/usr/include/
-	cp $(PTXDIST_WORKSPACE)/local_src/config-tools/wago_ct_get_rts_info.h $(PTXDIST_PLATFORMDIR)/sysroot-target/usr/include/
+	cp $(call ptx/in-path, PTXDIST_PATH, local_src/config-tools/wago_ct_ipc_msg_com.h) $(PTXDIST_PLATFORMDIR)/sysroot-target/usr/include/
+	cp $(call ptx/in-path, PTXDIST_PATH, local_src/config-tools/wago_ct_get_rts_info.h) $(PTXDIST_PLATFORMDIR)/sysroot-target/usr/include/
 
 	@$(call touch)
 

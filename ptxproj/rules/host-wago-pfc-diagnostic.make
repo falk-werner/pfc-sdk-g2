@@ -20,8 +20,8 @@ HOST_WAGO_PFC_DIAGNOSTIC_VERSION	:=
 HOST_WAGO_PFC_DIAGNOSTIC_MD5	:=
 HOST_WAGO_PFC_DIAGNOSTIC		:= wago-pfc-diagnostic
 HOST_WAGO_PFC_DIAGNOSTIC_SUFFIX	:= 
-HOST_WAGO_PFC_DIAGNOSTIC_URL	:= file://$(PTXDIST_WORKSPACE)/local_src/$(HOST_WAGO_PFC_DIAGNOSTIC)
-#HOST_WAGO_PFC_DIAGNOSTIC_SOURCE	:= $(PTXDIST_WORKSPACE)/local_src/$(HOST_WAGO_PFC_DIAGNOSTIC)
+HOST_WAGO_PFC_DIAGNOSTIC_URL	:= file://$(call ptx/in-path, PTXDIST_PATH, local_src/$(HOST_WAGO_PFC_DIAGNOSTIC))
+#HOST_WAGO_PFC_DIAGNOSTIC_SOURCE	:= $(call ptx/in-path, PTXDIST_PATH, local_src/$(HOST_WAGO_PFC_DIAGNOSTIC))
 HOST_WAGO_PFC_DIAGNOSTIC_DIR	:= $(HOST_BUILDDIR)/$(HOST_WAGO_PFC_DIAGNOSTIC)
 HOST_WAGO_PFC_DIAGNOSTIC_DIAG_DIR   := $(HOST_WAGO_PFC_DIAGNOSTIC_DIR)/src/diagnostic
 
@@ -34,7 +34,7 @@ $(STATEDIR)/host-wago-pfc-diagnostic.extract:
 	@$(call clean, $(HOST_WAGO_PFC_DIAGNOSTIC_DIR))
 	mkdir -p $(HOST_WAGO_PFC_DIAGNOSTIC_DIR)
 	rsync -a --exclude=".*" --exclude=objs/ --exclude="*.d" --exclude="*.o" \
-  $(PTXDIST_WORKSPACE)/local_src/$(HOST_WAGO_PFC_DIAGNOSTIC)/* $(HOST_WAGO_PFC_DIAGNOSTIC_DIR)
+  $(call ptx/in-path, PTXDIST_PATH, local_src/$(HOST_WAGO_PFC_DIAGNOSTIC))/* $(HOST_WAGO_PFC_DIAGNOSTIC_DIR)
 	@$(call touch)
 
 # ----------------------------------------------------------------------------

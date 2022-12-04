@@ -35,7 +35,7 @@ LIBEXTMEMCPY_MAKE_PARAMETER     := CROSS_COMPILE=$(COMPILER_PREFIX) \
 $(STATEDIR)/libextmemcpy.get:
 	@$(call targetinfo)
 	@mkdir -p $(LIBEXTMEMCPY_DIR)
-	@rsync -a --exclude=output/ $(PTXDIST_WORKSPACE)/local_src/$(LIBEXTMEMCPY_NAME)-$(LIBEXTMEMCPY_VERSION) $(BUILDDIR)
+	@rsync -a --exclude=output/ $(call ptx/in-path, PTXDIST_PATH, /local_src/$(LIBEXTMEMCPY_NAME)-$(LIBEXTMEMCPY_VERSION)) $(BUILDDIR)
 	@$(call touch)
 
 # ----------------------------------------------------------------------------

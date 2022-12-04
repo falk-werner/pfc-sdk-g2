@@ -19,9 +19,9 @@ PACKAGES-$(PTXCONF_MDMD_NG) += mdmd-ng
 MDMD_NG_VERSION        := 0.15.4
 MDMD_NG_MD5            := 
 MDMD_NG                := mdmd-ng
-MDMD_NG_URL            := file://$(PTXDIST_WORKSPACE)/wago_intern/mdmd-ng
+MDMD_NG_URL            := file://wago_intern/mdmd-ng
 MDMD_NG_BUILDCONFIG    := Release
-MDMD_NG_SRC_DIR        := $(PTXDIST_WORKSPACE)/wago_intern/mdmd-ng
+MDMD_NG_SRC_DIR        := $(call ptx/in-path, PTXDIST_PATH, wago_intern/mdmd-ng)
 MDMD_NG_BUILDROOT_DIR  := $(BUILDDIR)/mdmd-ng
 MDMD_NG_DIR            := $(MDMD_NG_BUILDROOT_DIR)/src
 MDMD_NG_BUILD_DIR      := $(MDMD_NG_BUILDROOT_DIR)/bin/$(MDMD_NG_BUILDCONFIG)
@@ -32,7 +32,8 @@ MDMD_NG_CONF_TOOL      := NO
 MDMD_NG_MAKE_ENV       := $(CROSS_ENV) \
  BUILDCONFIG=$(MDMD_NG_BUILDCONFIG) \
  BIN_DIR=$(MDMD_NG_BUILD_DIR) \
- SCRIPT_DIR=$(PTXDIST_SYSROOT_HOST)/lib/ct-build
+ SCRIPT_DIR=$(PTXDIST_SYSROOT_HOST)/lib/ct-build \
+ PTXDIST_PACKAGE_MK_FILE=$(call ptx/in-path, PTXDIST_PATH, rules/wago-net-005-mdmd-ng.make)
  
 MDMD_NG_PACKAGE_NAME   := $(MDMD_NG)_$(MDMD_NG_VERSION)_$(PTXDIST_IPKG_ARCH_STRING)
 MDMD_NG_PLATFORMCONFIGPACKAGEDIR   := $(PTXDIST_PLATFORMCONFIGDIR)/packages
@@ -136,7 +137,7 @@ $(STATEDIR)/mdmd-ng.targetinstall:
 	@$(call install_lib, mdmd-ng, 0, 0, 0644, libfr)
 #	# Install license manually as "frlib" is not a PTXdist package and
 #	# "licenses.make" does not take care of it.
-	@$(call install_copy, mdmd-ng, 0, 0, 0644, $(PTXDIST_WORKSPACE)/projectroot/usr/share/licenses/oss/license.frlib_1.1.9.txt, \
+	@$(call install_copy, mdmd-ng, 0, 0, 0644, $(call ptx/in-path, PTXDIST_PATH, projectroot/usr/share/licenses/oss/license.frlib_1.1.9.txt), \
 		/usr/share/licenses/oss/license.frlib_1.1.9.txt)
 
 	@$(call install_lib, mdmd-ng, 0, 0, 0644, libmodem)

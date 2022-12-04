@@ -18,8 +18,8 @@ PACKAGES-$(PTXCONF_SWCONFIG) += swconfig
 #
 SWCONFIG_VERSION	:= 0
 SWCONFIG		:= swconfig
-SWCONFIG_URL		:= file://$(PTXDIST_WORKSPACE)/local_src/$(SWCONFIG)
-SWCONFIG_SRC        := $(PTXDIST_WORKSPACE)/local_src/$(SWCONFIG)
+SWCONFIG_URL		:= file://local_src/$(SWCONFIG)
+SWCONFIG_SRC        := $(call ptx/in-path, PTXDIST_PATH, local_src/$(SWCONFIG))
 SWCONFIG_DIR		:= $(BUILDDIR)/$(SWCONFIG)
 SWCONFIG_BUILD_OOT	:= NO
 SWCONFIG_LICENSE	:= unknown

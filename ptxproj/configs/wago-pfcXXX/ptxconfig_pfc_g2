@@ -3786,7 +3786,7 @@ PTXCONF_PFC_200_G2_CDS3=y
 #
 # Build collection configuration
 #
-PTXCONF_WAGO_BUILD_COLLECTION="install-all-y-collection"
+#PTXCONF_WAGO_BUILD_COLLECTION="install-all-y-collection"
 
 #
 # ------------------------------------

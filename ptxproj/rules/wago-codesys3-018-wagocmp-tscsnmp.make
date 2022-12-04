@@ -17,8 +17,8 @@ PACKAGES-$(PTXCONF_CDS3_TSCSNMP) += cds3-tscsnmp
 CDS3_TSCSNMP_VERSION	 := 0.0.1
 CDS3_TSCSNMP              := TscSnmp
 CDS3_TSCSNMP_DIR          := $(BUILDDIR)/$(CDS3_TSCSNMP)
-CDS3_TSCSNMP_URL          := file://$(PTXDIST_WORKSPACE)/wago_intern/codesys3-Component/$(CDS3_TSCSNMP)
-CDS3_TSCSNMP_SRC_DIR      := $(PTXDIST_WORKSPACE)/wago_intern/codesys3-Component/$(CDS3_TSCSNMP)
+CDS3_TSCSNMP_URL          := file:///wago_intern/codesys3-Component/$(CDS3_TSCSNMP)
+CDS3_TSCSNMP_SRC_DIR      := $(call ptx/in-path, PTXDIST_PATH, wago_intern/codesys3-Component/$(CDS3_TSCSNMP))
 CDS3_TSCSNMP_SRC          := $(CDS3_TSCSNMP_SRC_DIR)/$(CDS3_TSCSNMP)
 CDS3_TSCSNMP_BIN          := lib$(CDS3_TSCSNMP).so.$(CDS3_TSCSNMP_VERSION)
 

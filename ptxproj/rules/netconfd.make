@@ -23,7 +23,7 @@ NETCONFD_URL            := file://local_src/netconfd
 NETCONFD_LICENSE        := GPLv2,LGPLv3
 
 NETCONFD_BUILDCONFIG    := Release
-NETCONFD_SRC_DIR        := $(PTXDIST_WORKSPACE)/local_src/netconfd
+NETCONFD_SRC_DIR        := $(call ptx/in-path, PTXDIST_PATH, local_src/netconfd)
 NETCONFD_BUILDROOT_DIR  := $(BUILDDIR)/$(NETCONFD)-$(NETCONFD_VERSION)
 NETCONFD_DIR            := $(NETCONFD_BUILDROOT_DIR)/src
 NETCONFD_BUILD_DIR      := $(NETCONFD_BUILDROOT_DIR)/bin/$(NETCONFD_BUILDCONFIG)

@@ -25,8 +25,8 @@ WAGO_PFC_DIAGNOSTIC		:= wago-pfc-diagnostic
 WAGO_PFC_DIAGNOSTIC_VER		:= wago-pfc-diagnostic-$(WAGO_PFC_DIAGNOSTIC_VERSION)
 endif
 
-WAGO_PFC_DIAGNOSTIC_URL		:= file://$(PTXDIST_WORKSPACE)/local_src/$(WAGO_PFC_DIAGNOSTIC)
-WAGO_PFC_DIAGNOSTIC_SRC		:= $(PTXDIST_WORKSPACE)/local_src/$(WAGO_PFC_DIAGNOSTIC)
+WAGO_PFC_DIAGNOSTIC_URL		:= file://$(call ptx/in-path, PTXDIST_PATH, local_src)/$(WAGO_PFC_DIAGNOSTIC)
+WAGO_PFC_DIAGNOSTIC_SRC		:= $(call ptx/in-path, PTXDIST_PATH, local_src)/$(WAGO_PFC_DIAGNOSTIC)
 WAGO_PFC_DIAGNOSTIC_DIR		:= $(BUILDDIR)/$(WAGO_PFC_DIAGNOSTIC)
 LED_SERVER_DIR		:= $(WAGO_PFC_DIAGNOSTIC_DIR)
 WAGO_PFC_DIAGNOSTIC_BUILD_OOT	:= NO
@@ -158,7 +158,7 @@ $(STATEDIR)/wago-pfc-diagnostic.targetinstall:
 
 ifdef PTXCONF_LOGFORWARD_STARTSCRIPT
 	@$(call install_copy, wago-pfc-diagnostic, 0, 0, 0755, \
-		$(PTXDIST_WORKSPACE)/projectroot/etc/init.d/logforward, \
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/etc/init.d/logforward), \
 		/etc/init.d/logforward, n)
 ifneq ($(PTXCONF_LOGFORWARD_BBINIT_LINK),"")
 	@$(call install_link, wago-pfc-diagnostic, ../init.d/logforward, \
@@ -167,7 +167,7 @@ endif
 endif
 ifdef PTXCONF_LED_SERVER_2_STARTSCRIPT
 	@$(call install_copy, wago-pfc-diagnostic, 0, 0, 0755, \
-		$(PTXDIST_WORKSPACE)/projectroot/etc/init.d/ledserver, \
+		$(call ptx/in-path, PTXDIST_PATH, /projectroot/etc/init.d/ledserver), \
 		/etc/init.d/ledserver, n)
 ifneq ($(PTXCONF_LED_SERVER_BBINIT_LINK),"")
 	@$(call install_link, wago-pfc-diagnostic, ../init.d/ledserver, \

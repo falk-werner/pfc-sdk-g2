@@ -26,7 +26,7 @@ PACKAGES-$(PTXCONF_CONFIG_TOOL_BASE) += config-tool-base
 #
 CONFIG_TOOL_BASE_VERSION      := 2.0.0
 CONFIG_TOOL_BASE              := config-tool-base
-CONFIG_TOOL_BASE_URL          := file://$(PTXDIST_WORKSPACE)/local_src/$(CONFIG_TOOL_BASE)
+CONFIG_TOOL_BASE_URL          := file://local_src/$(CONFIG_TOOL_BASE)
 CONFIG_TOOL_BASE_DIR          := $(BUILDDIR)/config-tools
 
 # ----------------------------------------------------------------------------
@@ -37,7 +37,7 @@ $(STATEDIR)/config-tool-base.extract:
 	@$(call targetinfo)
 	@$(call clean, $(CONFIG_TOOL_BASE_DIR))
 	rsync -a --exclude=.libs/ --exclude=objs/ --exclude="*.o" --exclude="*.a" --exclude="*.so" --exclude="*.so" \
-    $(PTXDIST_WORKSPACE)/local_src/config-tools $(BUILDDIR)
+    $(call ptx/in-path, PTXDIST_PATH, local_src/config-tools) $(BUILDDIR)
 	@$(call touch)
 
 # ----------------------------------------------------------------------------

@@ -40,7 +40,7 @@ endif
 
 $(WBM_NG_PLUGIN_DIAGNOSTIC_SOURCE):
 	@$(call targetinfo)
-	${PTXDIST_WORKSPACE}/scripts/wago/artifactory.sh fetch \
+	$(call ptx/in-path, PTXDIST_PATH, scripts/wago/artifactory.sh) fetch \
         '$(WBM_NG_PLUGIN_DIAGNOSTIC_URL)' '$@' '$(WBM_NG_PLUGIN_DIAGNOSTIC_MD5_FILE)'
 
 # ----------------------------------------------------------------------------
