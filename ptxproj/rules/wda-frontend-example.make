@@ -53,13 +53,10 @@ $(STATEDIR)/wda-frontend-example.targetinstall:
 	@$(call install_fixup, wda-frontend-example, AUTHOR, "<Falk Werner>")
 	@$(call install_fixup, wda-frontend-example, DESCRIPTION, missing)
 
-#	# This is an example only. Adapt it to your requirements. Read the
-#	# documentation's section "Make it Work" in chapter "Adding new Packages"
-#	# how to prepare this content or/and read chapter
-#	# "Rule File Macro Reference" to get an idea of the available macros
-#	# you can use here and how to use them.
-
-	@$(call install_copy, wda-frontend-example, 0, 0, 0755, -, /usr/bin/wda-frontend-example)
+	@$(call install_lib, wda-frontend-example, 0, 0, 0644, libwda_proxy)
+	@$(call install_copy, wda-frontend-example, 0, 0, 0755, -, /usr/bin/read-ordernumber-cpp)
+	@$(call install_copy, wda-frontend-example, 0, 0, 0755, -, /usr/bin/read-ordernumber-c)
+	@$(call install_copy, wda-frontend-example, 0, 0, 0755, -, /usr/bin/read-ordernumber.py)
 
 	@$(call install_finish, wda-frontend-example)
 

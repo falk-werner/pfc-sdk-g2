@@ -5,10 +5,9 @@
 
 int main()
 {
-    wago::paramcom::parameter_service_frontend_proxy proxy("myconnection");
+    wago::paramcom::parameter_service_frontend_proxy proxy("wda-cpp-example");
     auto & frontend = proxy.get_frontend();
 
-    std::cout << "Hi, there!" << std::endl;
     std::atomic<bool> shutdown_requested(false);
     std::thread context([&proxy, &shutdown_requested]() {
         while (!shutdown_requested) {
@@ -17,13 +16,16 @@ int main()
     });
 
     std::vector<wago::wda::parameter_instance_path> request{ {"Identity/Ordernumber"} };
-    auto response = frontend.get_parameters_by_path(request);
-    auto values = response.get();
-    auto const & value = values[0];
-    std::cout << (int) value.status << std::endl;
-    std::cout << value.value->get_string() << std::endl;
+    auto future = frontend.get_parameters_by_path(request);
+    auto responses = future.get();
+    auto const & response = responses.at(0);
+    if (response.is_success()) {
+        std::cout << "Ordernumber: " << response.value->get_string() << std::endl;
+    }
+    else {
+        std::cerr << "failed to read: status=" << (int) response.status << std::endl;
+    }
 
-    std::cout << "shutdown" << std::endl;
     shutdown_requested = true;
     context.join();
     return EXIT_SUCCESS;

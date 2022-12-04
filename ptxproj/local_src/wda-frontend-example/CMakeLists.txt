@@ -14,32 +14,7 @@ pkg_check_modules(PARAMCOM REQUIRED libparamcom)
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
-# C++ executable
-
-add_executable(wda-frontend-example
-	src/main.cpp
-)
-
-target_include_directories(wda-frontend-example PRIVATE ${PARAMCOM_INCLUDE_DIRS})
-target_link_options(wda-frontend-example PRIVATE ${PARAMCOM_LDFLAGS})
-target_link_libraries(wda-frontend-example PRIVATE Threads::Threads)
-target_compile_options(wda-frontend-example PRIVATE ${PARAMCOM_CFLAGS} ${PARAMCOM_CFLAGS_OTHER})
-
-# C library
-
-add_library(paramcom_c SHARED
-	src/paramcom_c)
-
-target_include_directories(paramcom_c PRIVATE ${PARAMCOM_INCLUDE_DIRS})
-target_link_options(paramcom_c PUBLIC ${PARAMCOM_LDFLAGS})
-target_link_libraries(paramcom_c PUBLIC Threads::Threads)
-target_compile_options(paramcom_c PUBLIC ${PARAMCOM_CFLAGS} ${PARAMCOM_CFLAGS_OTHER})
-
-# C executable
-
-add_executable(read-ordernumber-c src/main.c)
-target_link_libraries(read-ordernumber-c PRIVATE paramcom_c)
-
-
-install(TARGETS wda-frontend-example RUNTIME DESTINATION bin)
-
+add_subdirectory(cpp)
+add_subdirectory(libwda_proxy)
+add_subdirectory(c)
+add_subdirectory(python)

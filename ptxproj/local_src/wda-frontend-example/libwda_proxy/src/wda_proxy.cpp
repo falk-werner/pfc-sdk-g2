@@ -1,4 +1,4 @@
-#include "paramcom_c.h"
+#include "wda_proxy.h"
 
 #include <wago/paramcom/parameter_service_frontend_proxy.hpp>
 #include <cstring>
@@ -38,31 +38,12 @@ public:
         context.join();
     }
 
-    struct wda_value * read_sync(char const * path, wda_error * error) noexcept
+    wago::wda::parameter_response read_sync(char const * path) 
     {
-        struct wda_value * result = nullptr;
-
-        try {
-            std::vector<wago::wda::parameter_instance_path> requests{ {path} };
-            auto future = frontend.get_parameters_by_path(requests);
-            auto responses = future.get();
-            auto const & response = responses[0];
-            if (response.is_success()) {
-                result = new wda_value{response.value};
-            }
-            else {
-                if (nullptr != error) {
-                    error->status = (int) response.status;
-                }
-            }
-        }
-        catch (...) {
-            if (nullptr != error) {
-                error->status = 1; // general_error
-            }
-        }
-
-        return result;
+        std::vector<wago::wda::parameter_instance_path> requests{ {path} };
+        auto future = frontend.get_parameters_by_path(requests);
+        auto responses = future.get();
+        return responses[0];
     }
 
 private:
@@ -88,9 +69,28 @@ void wda_proxy_release(struct wda_proxy * proxy)
 }
 
 
-struct wda_value * wda_proxy_read_sync(struct wda_proxy * proxy, char const * path, struct wda_error * error)
+char * wda_proxy_read_str_sync(struct wda_proxy * proxy, char const * path, struct wda_error * error)
 {
-    return proxy->read_sync(path, error);
+    char * result = nullptr;
+
+    try {
+        auto response = proxy->read_sync(path);
+            if (response.is_success()) {
+                result = strdup(response.value->get_string().c_str());
+            }
+            else {
+                if (nullptr != error) {
+                    error->status = (int) response.status;
+                }
+            }
+    }
+    catch (...) {
+        if (nullptr != error) {
+            error->status = -1;
+        }
+    }
+
+    return result;
 }
 
 void wda_value_release(struct wda_value * value)
