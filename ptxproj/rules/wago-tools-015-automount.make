@@ -14,7 +14,7 @@
 PACKAGES-$(PTXCONF_WAGO_AUTOMOUNT) += wago-automount
 
 WAGO_AUTOMOUNT_VERSION  := 1.0.0
-WAGO_AUTOMOUNT_SRCDIR   := $(PTXDIST_WORKSPACE)/local_src/wago-automount
+WAGO_AUTOMOUNT_SRCDIR   := $(call ptx/in-path, PTXDIST_PATH, local_src/wago-automount)
 WAGO_AUTOMOUNT_DIR      := $(BUILDDIR)/wago-automount
 
 # ----------------------------------------------------------------------------

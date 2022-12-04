@@ -108,7 +108,7 @@ $(STATEDIR)/file-transfer.targetinstall:
 
 # Files that should be copied to the target
 
-	@$(call install_copy, file-transfer, 0, 0, 0750, $(PTXDIST_WORKSPACE)/projectroot/etc/config-tools/file_transfer, /etc/config-tools/file_transfer);
+	@$(call install_copy, file-transfer, 0, 0, 0750, $(call ptx/in-path, PTXDIST_PATH, projectroot/etc/config-tools/file_transfer), /etc/config-tools/file_transfer);
 
 	@$(call install_finish,file-transfer)
 

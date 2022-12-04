@@ -20,7 +20,7 @@ PACKAGES-$(PTXCONF_PROFINETDEMO) += profinetdemo
 PROFINETDEMO_VERSION := 0.0.1
 PROFINETDEMO   := profinetdemo
 PROFINETDEMO_PKGDIR := $(PKGDIR)/$(PROFINETDEMO)-$(PROFINETDEMO_VERSION)
-PROFINETDEMO_URL := file://$(SRCDIR)/profinetdemo
+PROFINETDEMO_URL := file://src/profinetdemo
 PROFINETDEMO_DIR := $(BUILDDIR)/$(PROFINETDEMO)
 PROFINETDEMO_SUBDIR := idevice
 PROFINETDEMO_MAKE_ENV 	:= $(CROSS_ENV)
@@ -40,7 +40,7 @@ $(STATEDIR)/profinetdemo.get:
 $(STATEDIR)/profinetdemo.extract:
 	@$(call targetinfo, $@)
 	@$(call clean, $(PROFINETDEMO_DIR))
-	cp -rd $(SRCDIR)/$(PROFINETDEMO) $(PROFINETDEMO_DIR)
+	cp -rd $(call ptx/in-path, PTXDIST_PATH, src/$(PROFINETDEMO)) $(PROFINETDEMO_DIR)
 	@$(call touch, $@)
 
 # ----------------------------------------------------------------------------

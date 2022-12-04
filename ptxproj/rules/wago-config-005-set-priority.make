@@ -18,7 +18,7 @@ PACKAGES-$(PTXCONF_CT_SET_THREAD_PRIORITY) += ct_set_thread_priority
 #
 CT_SET_THREAD_PRIORITY_VERSION  := 1.0.0
 CT_SET_THREAD_PRIORITY          := ct_set_thread_priority
-CT_SET_THREAD_PRIORITY_SRC      := $(SRCDIR)/$(CT_SET_THREAD_PRIORITY)
+CT_SET_THREAD_PRIORITY_SRC      := $(call ptx/in-path, PTXDIST_PATH, src/$(CT_SET_THREAD_PRIORITY))
 CT_SET_THREAD_PRIORITY_URL      :=
 CT_SET_THREAD_PRIORITY_DIR      := $(BUILDDIR)/$(CT_SET_THREAD_PRIORITY)
 
@@ -85,7 +85,7 @@ $(STATEDIR)/ct_set_thread_priority.targetinstall:
 	@$(call install_fixup,ct_set_thread_priority,DESCRIPTION,missing)
 
 # Install the init.d script	
-	@$(call install_copy, ct_set_thread_priority, 0, 0, 0755, $(PTXDIST_WORKSPACE)/projectroot/etc/init.d/set_thread_priority, $(CT_STP_INIT_LOC), n);
+	@$(call install_copy, ct_set_thread_priority, 0, 0, 0755, $(call ptx/in-path, PTXDIST_PATH, projectroot/etc/init.d/set_thread_priority), $(CT_STP_INIT_LOC), n);
 
 # Install set priority script
 	@$(call install_copy, ct_set_thread_priority, 0, 0, 0755, $(CT_SET_THREAD_PRIORITY_DIR)/set_priority.sh, $(CT_STP_SCRIPT_LOC), n);

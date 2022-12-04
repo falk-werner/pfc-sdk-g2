@@ -79,23 +79,23 @@ endif # PTXCONF_PLCLINUXRT
 endif # PTXCONF_WAGO_CUSTOM_ROOTFS_INSTALL_HOME_USER_GUEST
 
 ifdef PTXCONF_WAGO_CUSTOM_ROOTFS_INSTALL_CHECK_FOR_DEFAULT_PASSWORD
-	@$(call install_copy, wago-custom-install, 0, 0, 644, $(PTXDIST_WORKSPACE)/projectroot/etc/profile.passwd, /etc/profile.passwd)
+	@$(call install_copy, wago-custom-install, 0, 0, 644, $(call ptx/in-path, PTXDIST_PATH, projectroot/etc/profile.passwd), /etc/profile.passwd)
 
         # install per-user .profile file that sources /etc/profile.passwd for the users root, admin and user
 	@$(call install_copy, wago-custom-install, 0, 0, 0700, /root)
-	@$(call install_copy, wago-custom-install, 0, 0, 600, $(PTXDIST_WORKSPACE)/projectroot/root/.profile, /root/.profile)
+	@$(call install_copy, wago-custom-install, 0, 0, 600, $(call ptx/in-path, PTXDIST_PATH, projectroot/root/.profile), /root/.profile)
 
 ifndef PTXCONF_PLCLINUXRT
-	@$(call install_copy, wago-custom-install, ${PTXCONF_ROOTFS_PASSWD_ADMIN_UID}, ${PTXCONF_ROOTFS_PASSWD_ADMIN_GID}, 600, $(PTXDIST_WORKSPACE)/projectroot/root/.profile, /home/admin/.profile)
+	@$(call install_copy, wago-custom-install, ${PTXCONF_ROOTFS_PASSWD_ADMIN_UID}, ${PTXCONF_ROOTFS_PASSWD_ADMIN_GID}, 600, $(call ptx/in-path, PTXDIST_PATH, projectroot/root/.profile), /home/admin/.profile)
 endif # PTXCONF_PLCLINUXRT
 
 ifdef PTXCONF_ROOTFS_PASSWD_USER
-	@$(call install_copy, wago-custom-install, ${PTXCONF_ROOTFS_PASSWD_USER_UID}, ${PTXCONF_ROOTFS_PASSWD_USER_GID}, 600, $(PTXDIST_WORKSPACE)/projectroot/root/.profile, /home/user/.profile)
+	@$(call install_copy, wago-custom-install, ${PTXCONF_ROOTFS_PASSWD_USER_UID}, ${PTXCONF_ROOTFS_PASSWD_USER_GID}, 600, $(call ptx/in-path, PTXDIST_PATH, projectroot/root/.profile), /home/user/.profile)
 endif # PTXCONF_ROOTFS_PASSWD_USER
 endif # PTXCONF_WAGO_CUSTOM_ROOTFS_INSTALL_CHECK_FOR_DEFAULT_PASSWORD
 
 ifdef PTXCONF_WAGO_CUSTOM_ROOTFS_COPY_SD_INTERN
-	@$(call install_copy, wago-custom-install, 0, 0, 0755, $(PTXDIST_WORKSPACE)/projectroot/etc/init.d/cpsd2intern, /etc/init.d/cpsd2intern, n)
+	@$(call install_copy, wago-custom-install, 0, 0, 0755, $(call ptx/in-path, PTXDIST_PATH, projectroot/etc/init.d/cpsd2intern), /etc/init.d/cpsd2intern, n)
 endif
 
 ifdef PTXCONF_WAGO_CUSTOM_INITRAMFS_INIT
@@ -119,7 +119,7 @@ endif
 #
 ifdef PTXCONF_WAGO_CUSTOM_ROOTFS_MOUNTRW_STARTSCRIPT
 	@$(call install_copy, wago-custom-install, 0, 0, 0755, \
-		$(PTXDIST_WORKSPACE)/projectroot/etc/init.d/remountrw, \
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/etc/init.d/remountrw), \
 		/etc/init.d/remountrw, n)
 ifneq ($(PTXCONF_WAGO_CUSTOM_ROOTFS_MOUNTRW_BBINIT_LINK),)
 	@$(call install_link, wago-custom-install, ../init.d/remountrw, \
@@ -129,10 +129,10 @@ endif
 
 ifdef PTXCONF_WAGO_CUSTOM_ROOTFS_MOUNTVARLOG_STARTSCRIPT
 	@$(call install_copy, wago-custom-install, 0, 0, 0755, \
-		$(PTXDIST_WORKSPACE)/projectroot/etc/init.d/mountvarlog, \
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/etc/init.d/mountvarlog), \
 		/etc/init.d/mountvarlog, n)
 	@$(call install_copy, wago-custom-install, 0, 0, 0755, \
-		$(PTXDIST_WORKSPACE)/projectroot/etc/logging.conf, \
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/etc/logging.conf), \
 		/etc/logging.conf, n)
 
 ifneq ($(PTXCONF_WAGO_CUSTOM_ROOTFS_MOUNTVARLOG_BBINIT_LINK),)
@@ -143,7 +143,7 @@ endif
 
 ifdef PTXCONF_WAGO_CUSTOM_ROOTFS_AUTOFIRMREST_STARTSCRIPT
 	@$(call install_copy, wago-custom-install, 0, 0, 0755, \
-		$(PTXDIST_WORKSPACE)/projectroot/etc/init.d/auto_firmware_restore, \
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/etc/init.d/auto_firmware_restore), \
 		/etc/init.d/auto_firmware_restore, n)
 ifneq ($(PTXCONF_WAGO_CUSTOM_AUTOFIRMREST_BBINIT_LINK),)
 	@$(call install_link, wago-custom-install, ../init.d/auto_firmware_restore, \
@@ -213,7 +213,7 @@ ifdef PTXCONF_WAGO_CUSTOM_SHUTDOWN_STARTSCRIPT
 endif
 ifdef PTXCONF_WAGO_CUSTOM_ROOTFS_PERMISSIONS_STARTSCRIPT
 	@$(call install_copy, wago-custom-install, 0, 0, 0755, \
-		$(PTXDIST_WORKSPACE)/projectroot/etc/init.d/permissions, \
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/etc/init.d/permissions), \
 		/etc/init.d/permissions, n)
 ifneq ($(PTXCONF_WAGO_CUSTOM_PERMISSIONS_BBINIT_LINK),)
 	@$(call install_link, wago-custom-install, ../init.d/permissions, \
@@ -222,10 +222,10 @@ endif
 endif
 ifdef PTXCONF_WAGO_CUSTOM_ROOTFS_KBUSPRIO_STARTSCRIPT
 	@$(call install_copy, wago-custom-install, 0, 0, 0755, \
-		$(PTXDIST_WORKSPACE)/projectroot/etc/cfg-kbus-irq.sh, \
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/etc/cfg-kbus-irq.sh), \
 		/etc/cfg-kbus-irq.sh, n)
 	@$(call install_copy, wago-custom-install, 0, 0, 0755, \
-		$(PTXDIST_WORKSPACE)/projectroot/etc/init.d/kbusprio, \
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/etc/init.d/kbusprio), \
 		/etc/init.d/kbusprio, n)
 ifneq ($(PTXCONF_WAGO_CUSTOM_KBUSPRIO_BBINIT_LINK),)
 	@$(call install_link, wago-custom-install, ../init.d/kbusprio, \
@@ -234,7 +234,7 @@ endif
 endif
 ifdef PTXCONF_WAGO_CUSTOM_ROOTFS_SCREEN_INIT_STARTSCRIPT
 	@$(call install_copy, wago-custom-install, 0, 0, 0755, \
-		$(PTXDIST_WORKSPACE)/projectroot/etc/init.d/screen_init, \
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/etc/init.d/screen_init), \
 		/etc/init.d/screen_init, n)
 ifneq ($(PTXCONF_WAGO_CUSTOM_ROOTFS_SCREEN_INIT_BBINIT_LINK),)
 	@$(call install_link, wago-custom-install, ../init.d/screen_init, \
@@ -243,7 +243,7 @@ endif
 endif
 ifdef PTXCONF_WAGO_CUSTOM_LOG_SYSTEMSTART_INIT_STARTSCRIPT
 	@$(call install_copy, wago-custom-install, 0, 0, 0755, \
-		$(PTXDIST_WORKSPACE)/projectroot/etc/init.d/logsystemstart, \
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/etc/init.d/logsystemstart), \
 		/etc/init.d/logsystemstart, n)
 ifneq ($(PTXCONF_WAGO_CUSTOM_LOG_SYSTEMSTART_LINK),)
 	@$(call install_link, wago-custom-install, ../init.d/logsystemstart, \
@@ -297,7 +297,7 @@ ifdef PTXCONF_USE_SCREEN_WINDOW
 # This script is executed by /etc/profile when /bin/bash does not run in a screen terminal and
 # was started as a login shell.
 	@$(call install_copy, wago-custom-install, 0, 0, 0755, \
-		$(PTXDIST_WORKSPACE)/projectroot/etc/wago-screen-prompt.sh, /etc/wago-screen-prompt.sh, n);
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/etc/wago-screen-prompt.sh), /etc/wago-screen-prompt.sh, n);
 endif
 
 
@@ -306,14 +306,14 @@ endif
 # file and its link if either LIGHTTPD _or_ PUREFTPD variables are set.
 ifdef PTXCONF_LIGHTTPD
 	@$(call install_copy, wago-custom-install, 0, 0, 0755, \
-    $(PTXDIST_WORKSPACE)/projectroot/etc/init.d/ssl_post, /etc/init.d/ssl_post);
+    $(call ptx/in-path, PTXDIST_PATH, projectroot/etc/init.d/ssl_post), /etc/init.d/ssl_post);
 
 	@$(call install_link, wago-custom-install, ../init.d/ssl_post, \
 	/etc/rc.d/S99_ssl_post)
 else
 ifdef PTXCONF_PUREFTPD
 	@$(call install_copy, wago-custom-install, 0, 0, 0755, \
-    $(PTXDIST_WORKSPACE)/projectroot/etc/init.d/ssl_post, /etc/init.d/ssl_post);
+    $(call ptx/in-path, PTXDIST_PATH, projectroot/etc/init.d/ssl_post), /etc/init.d/ssl_post);
 
 	@$(call install_link, wago-custom-install, ../init.d/ssl_post, \
 	/etc/rc.d/S99_ssl_post)
@@ -328,34 +328,34 @@ endif
 #
 ifdef PTXCONF_WAGO_CUSTOM_ROOTFS_CFCARD_TOOL
 	@$(call install_copy, wago-custom-install, 0, 0, 0755, \
-		$(PTXDIST_WORKSPACE)/projectroot/usr/sbin/cp_cfcard, \
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/usr/sbin/cp_cfcard), \
 		/usr/sbin/cp_cfcard, n)
 endif
 ifdef PTXCONF_WAGO_CUSTOM_ROOTFS_UPDATE_BOOT_TOOL
 	@$(call install_copy, wago-custom-install, 0, 0, 0755, \
-		$(PTXDIST_WORKSPACE)/projectroot/usr/sbin/update_boot, \
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/usr/sbin/update_boot), \
 		/usr/sbin/update_boot, n)
 endif
 ifdef PTXCONF_WAGO_CUSTOM_ROOTFS_UPDATE_FW_TOOL
 	@$(call install_copy, wago-custom-install, 0, 0, 0755, \
-		$(PTXDIST_WORKSPACE)/projectroot/usr/sbin/update_fw, \
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/usr/sbin/update_fw), \
 		/usr/sbin/update_fw, n)
 endif
 ifdef PTXCONF_WAGO_CUSTOM_ROOTFS_UPDATE_MBR_GRUB_TOOL
 	@$(call install_copy, wago-custom-install, 0, 0, 0755, \
-		$(PTXDIST_WORKSPACE)/projectroot/usr/sbin/update_mbr_grub, \
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/usr/sbin/update_mbr_grub), \
 		/usr/sbin/update_mbr_grub, n)
 endif
 ifdef PTXCONF_WAGO_CUSTOM_ROOTFS_CREATE_HOME_INT_TOOL
 	@$(call install_copy, wago-custom-install, 0, 0, 0755, \
-		$(PTXDIST_WORKSPACE)/projectroot/usr/sbin/create_home_int, \
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/usr/sbin/create_home_int), \
 		/usr/sbin/create_home_int, n)
 endif
 
 ifdef PTXCONF_WAGO_CUSTOM_INSTALL_BACKUP_ACCOUNT_SETTINGS
 # backup and restore user, system account setting and groups
 	@$(call install_copy, wago-custom-install, 0, 0, 0755, \
-		$(PTXDIST_WORKSPACE)/projectroot/usr/sbin/settings_backup_accounts, \
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/usr/sbin/settings_backup_accounts), \
 		/usr/sbin/settings_backup_accounts, n)
 endif
 
@@ -369,10 +369,10 @@ ifdef PTXCONF_WAGO_CUSTOM_INSTALL_BACKUP_SETTINGS
 	@$(call install_alternative, wago-custom-install, 0, 0, 0755, \
 		/usr/sbin/settings_backup_restore)
 	@$(call install_copy, wago-custom-install, 0, 0, 0755, \
-	  $(PTXDIST_WORKSPACE)/projectroot/usr/sbin/settings_backup_checksys, \
+	  $(call ptx/in-path, PTXDIST_PATH, projectroot/usr/sbin/settings_backup_checksys), \
 		/usr/sbin/settings_backup_checksys, n)
 	@$(call install_copy, wago-custom-install, 0, 0, 0755, \
-	  $(PTXDIST_WORKSPACE)/projectroot/usr/sbin/settings_backup_docker, \
+	  $(call ptx/in-path, PTXDIST_PATH, projectroot/usr/sbin/settings_backup_docker), \
 		/usr/sbin/settings_backup_docker, n)
 endif
 
@@ -384,7 +384,7 @@ ifdef PTXCONF_WAGO_CUSTOM_ROOTFS_REVISIONS
 #temporary code for CODESYS3 Transistion
 ifdef PTXCONF_PFC_200_G2_CDS3
 	@$(call install_copy, wago-custom-install, 0, 0, 0644, \
-		$(PTXDIST_WORKSPACE)/projectroot/etc/REVISIONS_CDS3, \
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/etc/REVISIONS_CDS3), \
 		/etc/REVISIONS, n)
 else
 	@$(call install_alternative, wago-custom-install, 0, 0, 0644, \
@@ -394,13 +394,13 @@ endif
 
 ifdef PTXCONF_WAGO_CUSTOM_ROOTFS_SHELLS
 	@$(call install_copy, wago-custom-install, 0, 0, 0644, \
-		$(PTXDIST_WORKSPACE)/projectroot/etc/shells, \
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/etc/shells), \
 		/etc/shells, n)
 endif
 
 # Device Media
 #	@$(call install_copy, wago-custom-install, 0, 0, 0644, \
-#		$(PTXDIST_WORKSPACE)/projectroot/etc/DEVICE_MEDIA, \
+#		$(call ptx/in-path, PTXDIST_PATH, projectroot/etc/DEVICE_MEDIA), \
 #		/etc/DEVICE_MEDIA, n)
 	@$(call install_alternative, wago-custom-install, 0, 0, 0644, \
                  /etc/DEVICE_MEDIA)
@@ -427,7 +427,7 @@ endif
                  @SDH_USB_NO@, $(PTXCONF_WAGO_CUSTOM_ROOTFS_DEVICE_MEDIA_SDH))
 
 # Video Modes
-	@$(shell cp $(PTXDIST_WORKSPACE)/projectroot/etc/VIDEO_MODES \
+	@$(shell cp $(call ptx/in-path, PTXDIST_PATH, projectroot/etc/VIDEO_MODES) \
 	            $(VIDEO_MODES_TMP_FILE))
 ifdef PTXCONF_WAGO_CUSTOM_ROOTFS_VIDEO_MODE_769
 	@$(shell echo "769:   640x480, 256 color" >> $(VIDEO_MODES_TMP_FILE))
@@ -476,13 +476,13 @@ endif
 
 ifdef PTXCONF_WAGO_CUSTOM_ROOTFS_CONFIGS_PARTITIONS
 	@$(call install_copy, wago-custom-install, 0, 0, 0644, \
-		$(PTXDIST_WORKSPACE)/projectroot/etc/bootpartition, \
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/etc/bootpartition), \
 		/etc/bootpartition, n)
 	@$(call install_copy, wago-custom-install, 0, 0, 0644, \
-		$(PTXDIST_WORKSPACE)/projectroot/etc/rootpartition, \
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/etc/rootpartition), \
 		/etc/rootpartition, n)
 	@$(call install_copy, wago-custom-install, 0, 0, 0644, \
-		$(PTXDIST_WORKSPACE)/projectroot/etc/homepartition, \
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/etc/homepartition), \
 		/etc/homepartition, n)
 endif
 ifdef PTXCONF_WAGO_CUSTOM_DIAGNOSTICS
@@ -518,7 +518,7 @@ ifdef PTXCONF_GRUB
 # copy and edit grub menu file
 
 ifdef WAGO_CUSTOM_GRUB_MENU_LST
-	@$(call install_copy, wago-custom-install, 0, 0, 0644, $(PTXDIST_WORKSPACE)/projectroot/boot/grub/menu.lst, \
+	@$(call install_copy, wago-custom-install, 0, 0, 0644, $(call ptx/in-path, PTXDIST_PATH, projectroot/boot/grub/menu.lst), \
 		/boot/grub/menu.lst); \
 	@$(call install_replace, wago-custom-install, /boot/grub/menu.lst, \
 		@GRUB_CONSOLE@, $(PTXCONF_WAGO_CUSTOM_GRUB_CONSOLE)); \
@@ -705,19 +705,19 @@ ifdef PTXCONF_WAGO_CUSTOM_INSTALL_IOCHECK_ON
 endif
 
 	@$(call install_copy, wago-custom-install, 0, 0, 0755, \
-		$(PTXDIST_WORKSPACE)/projectroot/usr/sbin/setup_ssh_keys, \
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/usr/sbin/setup_ssh_keys), \
 		/usr/sbin/setup_ssh_keys, n)
 	@$(call install_copy, wago-custom-install, 0, 0, 0755, \
-		$(PTXDIST_WORKSPACE)/projectroot/usr/sbin/setup_https_key, \
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/usr/sbin/setup_https_key), \
 		/usr/sbin/setup_https_key, n)
 	@$(call install_copy, wago-custom-install, 0, 0, 0755, \
-		$(PTXDIST_WORKSPACE)/projectroot/usr/sbin/random_seed, \
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/usr/sbin/random_seed), \
 		/usr/sbin/random_seed, n)
 
 #build IPK's 
 ifdef PTXCONF_CDS3_TSCIOBACNET
 	#--- bacnet ipk ---
-	$(PTXDIST_WORKSPACE)/scripts/bacnet-helpers/make-metaipk_bacnet.sh $(BACNET_VERSION) $(BACNETSTACK_REVISION) $(PTXCONF_OPKG_OPKG_CONF_URL)
+	$(call ptx/in-path, PTXDIST_PATH, scripts/bacnet-helpers/make-metaipk_bacnet.sh) $(BACNET_VERSION) $(BACNETSTACK_REVISION) $(PTXCONF_OPKG_OPKG_CONF_URL)
 endif
 
 	@$(call install_finish, wago-custom-install)

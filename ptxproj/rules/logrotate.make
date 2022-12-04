@@ -59,7 +59,7 @@ $(STATEDIR)/logrotate.targetinstall:
 	@$(call install_copy, logrotate, 0, 0, 0755, /var/lib/logrotate)
 
 # WAGO custom configuration
-	@$(call install_copy, logrotate, 0, 0, 0644, $(PTXDIST_WORKSPACE)/projectroot/etc/logrotate.d/wagolog.conf, /etc/logrotate.d/wagolog.conf)
+	@$(call install_copy, logrotate, 0, 0, 0644, $(call ptx/in-path, PTXDIST_PATH, projectroot/etc/logrotate.d/wagolog.conf), /etc/logrotate.d/wagolog.conf)
 
 ifdef PTXCONF_LOGROTATE_SYSTEMD_UNIT
 	@$(call install_alternative, logrotate, 0, 0, 0644, \

@@ -20,7 +20,6 @@ PACKAGES-$(PTXCONF_FLASHXLOADER) += flashxloader
 FLASHXLOADER			:= flash-xloader
 FLASHXLOADER_VERSION  		:= 0
 FLASHXLOADER_URL		:= file://
-FLASHXLOADER_SOURCE		:= $(SRCDIR)/$(FLASHXLOADER)
 FLASHXLOADER_DIR		:= $(BUILDDIR)/$(FLASHXLOADER)
 
 # ----------------------------------------------------------------------------
@@ -38,7 +37,7 @@ $(STATEDIR)/flashxloader.get:
 $(STATEDIR)/flashxloader.extract:
 	@$(call targetinfo)
 	@$(call clean, $(FLASHXLOADER_DIR))
-	cp -r $(SRCDIR)/$(FLASHXLOADER) $(FLASHXLOADER_DIR)
+	cp -r $(call ptx/in-path, PTXDIST_PATH, src/$(FLASHXLOADER)) $(FLASHXLOADER_DIR)
 	@$(call touch)
 
 # ----------------------------------------------------------------------------

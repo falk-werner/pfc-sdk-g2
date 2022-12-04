@@ -42,7 +42,7 @@ $(STATEDIR)/hostlibloader.extract: $(STATEDIR)/autogen-tools
 			--exclude=project/objs_test/ \
 			--exclude=lib \
 			--exclude=project/lib_test\
-			 $(SRCDIR)/$(LIBLIBLOADER) $(HOST_BUILDDIR)
+			$(call ptx/in-path, PTXDIST_PATH, src/$(LIBLIBLOADER)) $(HOST_BUILDDIR)
 	@$(call touch)
 	
 

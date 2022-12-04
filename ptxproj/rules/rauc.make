@@ -124,7 +124,7 @@ ifeq ($(PTXCONF_PLATFORM), cc100)
 	@$(call install_link, rauc, system.conf.CC100, /etc/rauc/system.conf.cc100)
 endif
 
-	@$(call install_copy, rauc, 0, 0, 0644, $(PTXDIST_WORKSPACE)/$(RAUC_CERTIFICATE), /etc/rauc/ca.cert.pem)
+	@$(call install_copy, rauc, 0, 0, 0644, $(call ptx/in-path, PTXDIST_PATH, $(call remove_quotes,$(RAUC_CERTIFICATE))), /etc/rauc/ca.cert.pem)
 	@$(call install_copy, rauc, 0, 0, 0644, -, \
 		/usr/share/dbus-1/system-services/de.pengutronix.rauc.service)
 	@$(call install_copy, rauc, 0, 0, 0644, -, \

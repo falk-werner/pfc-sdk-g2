@@ -461,25 +461,25 @@ endif
 
 ifdef PTXCONF_DROPBEAR_RSA
 	@$(call install_copy, dropbear, 0, 0, 0400, \
-		$(PTXDIST_WORKSPACE)/projectroot/etc/dropbear/dropbear_rsa_host_key, \
+		$(call ptx/in-path, PTXDIST_PATH, /projectroot/etc/dropbear/dropbear_rsa_host_key), \
 		/etc/dropbear/dropbear_rsa_host_key)
 endif
 
 ifdef PTXCONF_DROPBEAR_DSS
 	@$(call install_copy, dropbear, 0, 0, 0400, \
-		$(PTXDIST_WORKSPACE)/projectroot/etc/dropbear/dropbear_dss_host_key, \
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/etc/dropbear/dropbear_dss_host_key), \
 		/etc/dropbear/dropbear_dss_host_key)
 endif
 
 ifdef PTXCONF_DROPBEAR_ECDSA
 	@$(call install_copy, dropbear, 0, 0, 0400, \
-		$(PTXDIST_WORKSPACE)/projectroot/etc/dropbear/dropbear_ecdsa_host_key, \
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/etc/dropbear/dropbear_ecdsa_host_key), \
 		/etc/dropbear/dropbear_ecdsa_host_key)
 endif
 
 ifdef PTXCONF_DROPBEAR_ED25519
 	@$(call install_copy, dropbear, 0, 0, 0400, \
-		$(PTXDIST_WORKSPACE)/projectroot/etc/dropbear/dropbear_ed25519_host_key, \
+		$(call ptx/in-path, PTXDIST_PATH, projectroot/etc/dropbear/dropbear_ed25519_host_key), \
 		/etc/dropbear/dropbear_ed25519_host_key)
 endif
 

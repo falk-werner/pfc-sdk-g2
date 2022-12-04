@@ -100,7 +100,7 @@ PTXPROJ="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Local defines:
 PTXDIST_PACKAGES_DIR="${PTXDIST_PLATFORMDIR}/packages/"
-PTXDIST_LICENSES_DIR="${PTXDIST_WORKSPACE}/projectroot/usr/share/licenses/oss/"
+PTXDIST_LICENSES_DIR="$(realpath $(dirname -- "${BASH_SOURCE[0]}")/../../projectroot/usr/share/licenses/oss)/"
 
 SSSD_REPO_NAME='sssd_repo'
 SSSD_REPO_FILE_NAME="${SSSD_REPO_NAME}_${SSSD_REPO_VERSION}_FW${FW_VERSION}.repo"

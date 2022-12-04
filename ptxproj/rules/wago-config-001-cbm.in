@@ -32,7 +32,7 @@ menuconfig CT_MENU_CBM_MAIN
 	default n
 	prompt "cbm"
 
-  select HOST_CT_MAKE_XML_CONFIG # tool to generate XML configs for wbm/cbm
+  # select HOST_CT_MAKE_XML_CONFIG # tool to generate XML configs for wbm/cbm
 
   select CBM
 

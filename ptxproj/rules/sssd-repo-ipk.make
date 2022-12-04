@@ -50,9 +50,9 @@ SSSD_REPO_IPK_CONF_TOOL		:= NO
 
 $(STATEDIR)/sssd-repo-ipk.compile: $(STATEDIR)/sssd.targetinstall
 	@$(call targetinfo)
-	@mkdir $(SSSD_REPO_IPK_DIR)
+	@mkdir -p $(SSSD_REPO_IPK_DIR)
 #	# create repo IPK for SSSD and dependencies
-	@$(PTXDIST_WORKSPACE)/scripts/sssd-helpers/make-meta-ipk-sssd.sh $(SSSD_REPO_IPK_VERSION) $(SSSD_REPO_IPK_FW_REVISION) $(SSSD_REPO_IPK_DIR)
+	@$(call ptx/in-path, PTXDIST_PATH, scripts/sssd-helpers/make-meta-ipk-sssd.sh) $(SSSD_REPO_IPK_VERSION) $(SSSD_REPO_IPK_FW_REVISION) $(SSSD_REPO_IPK_DIR)
 	@$(call touch)
 
 # ----------------------------------------------------------------------------

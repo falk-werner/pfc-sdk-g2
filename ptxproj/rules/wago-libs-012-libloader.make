@@ -43,7 +43,7 @@ $(STATEDIR)/liblibloader.extract:
 			--exclude=project/objs_test/ \
 			--exclude=lib \
 			--exclude=project/lib_test\
-			 $(SRCDIR)/$(LIBLIBLOADER) $(BUILDDIR)
+			$(call ptx/in-path, PTXDIST_PATH, src/$(LIBLIBLOADER)) $(BUILDDIR)
 	@$(call touch)
 	
 

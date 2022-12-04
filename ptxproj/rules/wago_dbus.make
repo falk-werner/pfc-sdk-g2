@@ -22,8 +22,8 @@ else
 WAGO_DBUS_VERSION	:= 1.0
 endif
 WAGO_DBUS		:= wago_dbus
-WAGO_DBUS_URL		:= file://$(SRCDIR)/$(WAGO_DBUS)
-WAGO_DBUS_SRC		:= $(SRCDIR)/$(WAGO_DBUS)
+WAGO_DBUS_URL		:= file://src/$(WAGO_DBUS)
+WAGO_DBUS_SRC		:= $(call ptx/in-path, PTXDIST_PATH, src/$(WAGO_DBUS))
 WAGO_DBUS_DIR		:= $(BUILDDIR)/$(WAGO_DBUS)
 WAGO_DBUS_BUILD_OOT	:= NO
 WAGO_DBUS_LICENSE	:= unknown

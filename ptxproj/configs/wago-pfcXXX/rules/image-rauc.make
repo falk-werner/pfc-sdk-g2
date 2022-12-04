@@ -27,8 +27,8 @@ IMAGE_RAUC_CONFIG	:= $(call remove_quotes, $(PTXCONF_IMAGE_RAUC_CONFIG))
 # Image
 # ----------------------------------------------------------------------------
 
-IMAGE_RAUC_KEY = $(PTXDIST_WORKSPACE)/$(call remove_quotes,$(PTXCONF_RAUC_DEVELOPMENT_KEY))
-IMAGE_RAUC_CERT = $(PTXDIST_WORKSPACE)/$(call remove_quotes,$(PTXCONF_RAUC_DEVELOPMENT_CERT))
+IMAGE_RAUC_KEY = $(call ptx/in-path, PTXDIST_PATH, $(call remove_quotes,$(PTXCONF_RAUC_DEVELOPMENT_KEY)))
+IMAGE_RAUC_CERT = $(call ptx/in-path, PTXDIST_PATH, $(call remove_quotes,$(PTXCONF_RAUC_DEVELOPMENT_CERT)))
 
 # TEMPORARY WORKAROUND TODO: reimplement properly (s. WAT26585)
 #
