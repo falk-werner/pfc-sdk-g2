@@ -68,6 +68,19 @@ RUN cd /tmp \
   && ./configure \
   && make
 
+FROM builder as packages
+ARG PACKAGE_VERSION=v04.01.10
+ARG SDK_BASE_URL=https://github.com/falk-werner/pfc-sdk-g2/releases/download/${PACKAGE_VERSION}
+RUN mkdir -p /opt/packages
+RUN cd /opt/packages \
+  && curl -fSL -s -o oss.tar.xz "${SDK_BASE_URL}/open-source-packages.tar.xz" \
+  && tar -xf oss.tar.xz \
+  && rm oss.tar.xz
+RUN cd /opt/packages \
+  && curl -fSL -s -o css.tar.xz "${SDK_BASE_URL}/closed-source-packages.tar.xz" \
+  && tar -xf css.tar.xz \
+  && rm css.tar.xz
+
 FROM builder as image
 
 ARG TOOLCHAIN_DIR=/opt/gcc-Toolchain-2019.12
@@ -81,14 +94,20 @@ RUN cd /tmp/ptxdist-Update-2020.08.0 \
   && cd - \
   && rm -rf /tmp/ptxdist-Update-2020.08.0
 
-COPY build.sh /usr/local/bin/build
-
 RUN mkdir -p /home/user/ptxproj
 
 ARG USERID=1000
 RUN useradd -u "$USERID" -ms /bin/bash user
-RUN chown -R user:user /home/user 
+RUN chown -R user:user /home/user
 
+COPY --from=packages --chown=user:user /opt/packages /home/user/packages
+
+COPY build.sh /usr/local/bin/build
+
+COPY --chown=user:user pfc-sdk-g2 /home/user/pfc-sdk-g2
+RUN su user -c "cd /home/user/pfc-sdk-g2 && ptxdist select configs/wago-pfcXXX/ptxconfig_pfc_g2"
+RUN su user -c "cd /home/user/pfc-sdk-g2 && ptxdist platform configs/wago-pfcXXX/platformconfig"
+RUN su user -c "cd /home/user/pfc-sdk-g2 && ptxdist toolchain /opt/gcc-Toolchain-2019.12/arm-linux-gnueabihf/bin/"
 
 FROM scratch
 

@@ -2,10 +2,6 @@
 
 set -e
 
-VERSION=v04.01.10
-OSS_PACKAGES_URL=https://github.com/falk-werner/pfc-sdk-g2/releases/download/${VERSION}/open-source-packages.tar.xz
-CSS_PACKAGES_URL=https://github.com/falk-werner/pfc-sdk-g2/releases/download/${VERSION}/closed-source-packages.tar.xz
-
 print_usage() {
     cat << EOF
 build, (c) 2022 Falk Werner
@@ -28,32 +24,24 @@ case "$1" in
         ;;
     init)
         echo "Setup PTXdist project"
-        ptxdist select configs/wago-pfcXXX/ptxconfig_pfc_g2
-        ptxdist platform configs/wago-pfcXXX/platformconfig        
-        ptxdist toolchain /opt/gcc-Toolchain-2019.12/arm-linux-gnueabihf/bin/
+
+        rm -rf /home/user/ptxproj/*
+        
+        ln -s /home/user/pfc-sdk-g2 base
+
+        mkdir src
+        cp /home/user/packages/src/* src
+        cp /home/user/pfc-sdk-g2/src/*.md5 src
+
+        mkdir -p configs/wago-pfcXXX
+        ln -s /home/user/packages/configs/wago-pfcXXX/packages configs/wago-pfcXXX/packages
+
         ptxdist clean -q
-
-        if ! md5sum -c packages/closed-source-packages.tar.xz.md5 ; then
-            echo "Add Closed Source packages"
-            curl -fSL -s -o packages/closed-source-packages.tar.xz ${CSS_PACKAGES_URL}
-            md5sum -c packages/closed-source-packages.tar.xz.md5
-        fi
-        tar -xf packages/closed-source-packages.tar.xz
-
-        if ! md5sum -c packages/open-source-packages.tar.xz.md5 ; then
-            echo "Add OSS Packages"
-            curl -fSL -s -o packages/open-source-packages.tar.xz ${OSS_PACKAGES_URL}
-            md5sum -c packages/open-source-packages.tar.xz.md5
-        fi
-        tar -xf packages/open-source-packages.tar.xz
         ;;
     build | "")
         ptxdist go -q
         ;;
     get)
-        ptxdist select configs/wago-pfcXXX/ptxconfig_pfc_g2
-        ptxdist platform configs/wago-pfcXXX/platformconfig        
-        ptxdist toolchain /opt/gcc-Toolchain-2019.12/arm-linux-gnueabihf/bin/
         ptxdist get -q
         ;;
     images)
