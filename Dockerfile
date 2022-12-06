@@ -112,7 +112,7 @@ RUN su user -c "cd /home/user/pfc-sdk-g2 && ptxdist toolchain /opt/gcc-Toolchain
 FROM scratch
 
 LABEL maintainer="Falk Werner"
-LABEL version="22.0.0"
+LABEL version="23.0.0"
 LABEL description="PFC Builder"
 
 COPY --from=image / /
