@@ -25,8 +25,8 @@ LED_SERVER_2		:= led-server-2
 LED_SERVER_2_VER		:= led-server-2-$(LED_SERVER_2_VERSION)
 endif
 
-LED_SERVER_2_URL		:= file://$(call ptx/in-path, PTXDIST_PATH, local_src)/$(LED_SERVER_2)
-LED_SERVER_2_SRC		:= $(call ptx/in-path, PTXDIST_PATH, local_src)/$(LED_SERVER_2)
+LED_SERVER_2_URL		:= file://$(call ptx/in-path, PTXDIST_PATH, local_src/$(LED_SERVER_2))
+LED_SERVER_2_SRC		:= $(call ptx/in-path, PTXDIST_PATH, local_src/$(LED_SERVER_2))
 LED_SERVER_2_DIR		:= $(BUILDDIR)/$(LED_SERVER_2)
 #LED_SERVER_DIR		:= $(LED_SERVER_2_DIR)
 LED_SERVER_2_BUILD_OOT	:= NO
