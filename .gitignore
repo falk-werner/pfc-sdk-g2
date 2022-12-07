@@ -1,0 +1,5 @@
+/.vscode/
+/build-cache/
+/ptxproj/platform-wago-pfcXXX
+/ptxproj/src
+/ptxproj/configs/wago-pfcXXX/packages

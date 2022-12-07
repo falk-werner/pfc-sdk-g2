@@ -1,0 +1,11 @@
+prefix=${pcfiledir}/../..
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libwda_proxy
+Description: C wrapper to access WDA
+Version: 1.0.0
+Requires: libparamcom
+Libs: -L${libdir} -Wl,-lwda_proxy
+Cflags:  -I${includedir}
