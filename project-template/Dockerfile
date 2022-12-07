@@ -1,6 +1,7 @@
 ARG REGISTRY_PREFIX=''
+ARG VERSION="23.0.0pre"
 
-FROM ${REGISTRY_PREFIX}pfc-builder as image
+FROM ${REGISTRY_PREFIX}me8i/pfc-builder:${VERSION} as image
 
 ARG USERID=1000
 RUN usermod -u "$USERID" user 
