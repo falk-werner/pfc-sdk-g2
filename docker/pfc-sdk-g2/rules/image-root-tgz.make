@@ -21,7 +21,7 @@ IMAGE_ROOT_TGZ_IMAGE	:= $(IMAGEDIR)/root.tgz
 IMAGE_ROOT_TGZ_PKGS    = $(PTX_PACKAGES_INSTALL)
 ifdef PTXCONF_WAGO_BUILD_COLLECTION
 ifneq ($(call remove_quotes, $(PTXCONF_WAGO_BUILD_COLLECTION)),)
-IMAGE_ROOT_TGZ_PKGS	= $(call ptx/collection, $(PTXDIST_WORKSPACE)/configs/$(PTXCONF_PLATFORM)/$(call remove_quotes, $(PTXCONF_WAGO_BUILD_COLLECTION)))
+IMAGE_ROOT_TGZ_PKGS	= $(call ptx/collection, $(call ptx/in-platformconfigdir, $(call remove_quotes, $(PTXCONF_WAGO_BUILD_COLLECTION))))
 endif
 endif
 
